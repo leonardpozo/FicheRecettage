@@ -1,4 +1,5 @@
 <?php
+require ("db.php");
 if (isset($_POST['pseudo']) && !empty($_POST['pseudo'])
     && isset($_POST['password']) && !empty($_POST['password'])
     && isset($_POST['email']) && !empty($_POST['email'])
