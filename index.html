@@ -14,12 +14,54 @@
     <form action="form.php" method="post">
 
         <p>
-            <label>prenom</label>
-            <input type=text" name="prenom" />
+            <label>Nom du Projet</label>
+            <input type=text" name="Projet" />
         </p>
 
+        <p>
+            <label>Information Client</label>
+            <br/>
+            <label>Nom :</label>
+            <input type=text" name="t1" id="t1" />
+            <br/>
+            <label>Prénom :</label>
+            <input type=text" name="t2" id="t2" />
+            <br/>
+            <label>Adresse :</label>
+            <input type=text" name="t3" id="t3" />
+            <br/>
+            <label>Mail :</label>
+            <input type=text" name="Mail" id="4" />
+            <br/>
+            <label>Site :</label>
+            <input type=text" name="Site" id="5" />
+        </p>
+
+
+        <p>
+            <label>Objectif Projet (sous forme de liste)</label>
+            <br/>
+            <textarea rows="4" cols="50" type="text" name="ObjectifSmart">
+</textarea>
+        </p>
+
+
         <input type="submit" value="Register" name="submit" />
+        <input type="button" value="save data" name="Save" onClick="aa(); "/>
     </form>
+
+
+    <script type="text/javascript">
+        function aa()
+        {
+            var xmlhttp;
+            xmlhttp=new XMLHttpRequest();
+            xmlhttp.open("GET","insert.php?nm="+document.getElementById("t1").value+"&ct="+document.getElementById("t2").value+"&age="+document.getElementById("t3").value,false);
+            xmlhttp.send(null);
+        }
+    </script>
+
+
 </section>
 
 </body>
