@@ -6,13 +6,12 @@
  * Time: 13:41
  */
 
+require ("db.php");
+
 $nm=$_GET["nm"];
 $city=$_GET["ct"];
 $age=$_GET["age"];
+$id="";
 
+$db->query("INSERT INTO test VALUES('$id','$nm','$city','$age')");
 
-mysql_connect("localhost","root","root");
-mysql_select_db("testing");
-mysql_query("INSERT INTO test VALUES('$nm','$city','$age')");
-
-?>

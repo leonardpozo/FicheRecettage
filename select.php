@@ -1,18 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Auto Recipe</title>
-</head>
+<?php
+/**
+ * Created by PhpStorm.
+ * User: mathieurella
+ * Date: 13/10/2016
+ * Time: 10:48
+ */
+require ("db.php");
+?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Auto Recipe</title>
+    </head>
 <body>
 
 <header>
-    
+    <script type="text/javascript">
+        function aa()
+        {
+            var xmlhttp;
+            xmlhttp=new XMLHttpRequest();
+            xmlhttp.open("POST","update.php?nm="+document.getElementById("t1").value+"&ct="+document.getElementById("t2").value+"&age="+document.getElementById("t3").value+"&id="+document.getElementById("nbprojet").value,false);
+            xmlhttp.send(null);
+        }
+    </script>
 </header>
-<section align='center'>
-    <h2>Nouvelle recette</h2>
-    <form action="form.php" method="post">
+<?php
+$id=$_GET["id"];
 
+/*$req = $db->prepare("UPDATE test SET nm = :nm, ct = :ct, age = :age WHERE ID = :id");
+$req->execute(array(
+    'nm' => $nm,
+    'ct' => $ct,
+    'age' => $age,
+    'ID' => $id
+));*/
+
+$req2 = $db->prepare("SELECT * FROM test WHERE id = :id");
+$req2->execute(array(
+    'id' => $id
+));
+
+while($do = $req2->fetch() ) {
+
+    ?>
+
+    <form action="update.php" method="post">
+        <input type="hidden" id="id" name="id" value="<?php echo $do["id"];?>" />
         <p>
             <label>Nom du Projet</label>
             <input type=text" name="Projet" />
@@ -22,13 +57,13 @@
             <label><h2>Information Client</h2></label>
             <br/>
             <label>Nom :</label>
-            <input type=text" name="t1" id="t1" />
+            <input type=text" name="name" id="name" value="<?php echo $do["name"];?>" />
             <br/>
             <label>Prénom :</label>
-            <input type=text" name="t2" id="t2" />
+            <input type=text" name="age" id="age"  value="<?php echo $do["age"];?>" />
             <br/>
             <label>Adresse :</label>
-            <input type=text" name="t3" id="t3" />
+            <input type=text" name="city" id="city"  value="<?php echo $do["city"];?>" />
             <br/>
             <label>Mail :</label>
             <input type=text" name="Mail" id="4" />
@@ -142,24 +177,20 @@
             </textarea>
         </p>
 
-        <input type="hidden" name="id" id="id" />
-        <input type="submit" value="Register" name="submit" />
+        <input type="submit" value="Mettre à jour" name="submit" />
         <input type="button" value="save data" name="Save" onClick="aa(); "/>
     </form>
 
 
-    <script type="text/javascript">
-        function aa()
-        {
-            var xmlhttp;
-            xmlhttp=new XMLHttpRequest();
-            xmlhttp.open("GET","insert.php?nm="+document.getElementById("t1").value+"&ct="+document.getElementById("t2").value+"&age="+document.getElementById("t3").value,false);
-            xmlhttp.send(null);
-        }
-    </script>
+    <?php
+    $do->closeCursor();
+}
+
+?>
 
 
-</section>
+
+
 
 </body>
 </html>
